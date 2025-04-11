@@ -339,7 +339,8 @@ class PreviewKivyCamera(PreviewCommon, CommonGestures):
         if self._camera:
             self._camera.stop()
             self._camera.unbind(on_texture=self.on_tex)
-            self.clear_texture()
+            if platform != 'ios':
+                self.clear_texture()  ## Crashed camera on ios
             if self._camera.__class__.__name__ == 'CameraGi':
                 self._camera.unload()
             del self._camera
